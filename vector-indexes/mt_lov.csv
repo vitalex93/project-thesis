@@ -1,0 +1,23 @@
+﻿Entity;Type;Name;Description
+Account;MT_LOV;MEAS_ACCL_APPL_STATUS_PM1;Application status in previous month
+Account;MT_LOV;MEAS_ACCL_APPL_TYPE;Application type in the observation period
+Account;MT_LOV;MEAS_ACCL_APPL_TYPE_PM1;Application type in previous observation period
+Account;MT_LOV;MEAS_ACCL_DELINQ_DCA_PM1;External agency (DCA or legal office) assigned on previous observation point
+Account;MT_LOV;MEAS_ACCL_APPL_STATUS;Status of the last submitted application within the observation period.
+Account;MT_LOV;MEAS_ACCH_STATUS;Account status
+Account;MT_LOV;MEAS_ACCH_CATEG_SEGMENT;Account segment
+Account;MT_LOV;MEAS_ACCH_DELINQ_DCA;External agency (DCA or legal office) currently assigned
+Account;MT_LOV;MEAS_ACCH_ORIGIN_PORTFOLIO;Portfolio
+Account;MT_LOV;MEAS_ACCL_AMT_PRINCIPAL_CLASS;Principal amount class
+Account;MT_LOV;MEAS_ACCH_CATEG_CLASS_ASSET;Asset class
+Account;MT_LOV;MEAS_ACCL_ORIGIN_PORTFOLIO_GROUPING;Portfolio grouping
+Application;MT_LOV;MEAS_APPL_ORIGIN;Application origin
+Application;MT_LOV;MEAS_APPL_TYPE;Application type
+Application;MT_LOV;MEAS_APLL_DELINQ_BUCKET_PP1;Application bucket in the previous observation period
+Application;MT_LOV;MEAS_APLL_STATUS_PM1;Application status in previous month
+Application;MT_LOV;MEAS_APPL_STATUS;Application status
+Application;MT_LOV;MEAS_APLL_DELINQ_BUCKET_PM1;Months in arrears, 1 month ago
+Application;MT_LOV;MEAS_APLL_BUCKET_CLASS_OR_CANCELLED;Bucket class for active arrangements or cancelled status
+Application;MT_LOV;MEAS_APLL_STATUS_L1;Application status at the end of the preceding observation period
+Customer;MT_LOV;MEAS_CUSH_CATEG_SEGMENT;Customer segment
+Application;MT_LOV;MEAS_APPL_DELINQ_BUCKET;Months in arrears

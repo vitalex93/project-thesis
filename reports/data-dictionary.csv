@@ -1,0 +1,64 @@
+﻿Entity;Type;Name;Description
+Account;MT_MONEY;MEAS_ACCL_STRAY_PAYMENT_PREDICTION_PAYERS_AMT;Payment prediction for stray payers, not in active settlement
+Account;MT_LOV;MEAS_ACCL_APPL_STATUS_PM1;Application status in previous month
+Account;MT_MONEY;MEAS_ACCL_SETTLEMENT_PAYMENT_PREDICTION_PAYERS_AMT;Payment prediction for settlement payers
+Account;MT_LOV;MEAS_ACCL_APPL_TYPE;Application type in the observation period
+Account;MT_LOV;MEAS_ACCL_APPL_TYPE_PM1;Application type in previous observation period
+Account;MT_MONEY;MEAS_ACCH_AMT_PAYMENT_CP;Amount paid within the observation period
+Account;MT_LOV;MEAS_ACCL_DELINQ_DCA_PM1;External agency (DCA or legal office) assigned on previous observation point
+Account;MT_LOV;MEAS_ACCL_APPL_STATUS;Status of the last submitted application within the observation period.
+Account;MT_LOV;MEAS_ACCH_STATUS;Account status
+Account;MT_LOV;MEAS_ACCH_CATEG_SEGMENT;Account segment
+Account;MT_TEXT;MEAS_ACCH_QC_CASECODE;QC case code
+Account;MT_CUSTOMER;MEAS_ACCT_CUST_CODE;Customer (primary account holder)
+Account;MT_LOV;MEAS_ACCH_DELINQ_DCA;External agency (DCA or legal office) currently assigned
+Account;MT_LOV;MEAS_ACCH_ORIGIN_PORTFOLIO;Portfolio
+Account;MT_DATE;MEAS_ACCH_DATE_NOMINAL;Observation point date
+Account;MT_ITEMS;MEAS_ACCH_SNAPNUM;Observation point number
+Account;MT_LOV;MEAS_ACCL_AMT_PRINCIPAL_CLASS;Principal amount class
+Account;MT_LOV;MEAS_ACCH_CATEG_CLASS_ASSET;Asset class
+Account;MT_DATE;MEAS_ACCL_DATE_STATUS_REJECTED;Last rejection date of all applications within the observation perion
+Account;MT_LOV;MEAS_ACCL_ORIGIN_PORTFOLIO_GROUPING;Portfolio grouping
+Application;MT_CUSTOMER;MEAS_APPL_CUSTOMER;Customer
+Application;MT_TEXT;MEAS_APPL_NUMBER;Unique application identifier
+Application;MT_DATE;MEAS_APPL_DATE_SUBMITTED;Application submission date
+Application;MT_MONEY;MEAS_APPL_AMT_APPROVED;Approved amount
+Application;MT_ITEMS;MEAS_APPL_DURATION_APPROVED;Approved duration
+Application;MT_DATE;MEAS_APPL_DATE_STATUS_APPROVED;Approval date
+Application;MT_LOV;MEAS_APPL_ORIGIN;Application origin
+Application;MT_ITEMS;MEAS_APPL_SNAPNUM;Observation point number (application)
+Application;MT_DATE;MEAS_APPL_DATE_NOMINAL;Observation point date (application)
+Application;MT_LOV;MEAS_APPL_TYPE;Application type
+Application;MT_MONEY;MEAS_APPL_AMT_DISCOUNT;Discount amount
+Application;MT_LOV;MEAS_APLL_DELINQ_BUCKET_PP1;Application bucket in the previous observation period
+Application;MT_LOV;MEAS_APLL_STATUS_PM1;Application status in previous month
+Application;MT_FLAG;MEAS_APLL_IS_APPLICATION;Application indicator
+Application;MT_LOV;MEAS_APPL_STATUS;Application status
+Application;MT_ACCOUNT;MEAS_APPL_ACCOUNT_SUBJECT;Account concerned
+Application;MT_MONEY;MEAS_APPL_AMT_PAYMENTS_TOTAL;Total payments amount so far
+Application;MT_FLAG;MEAS_APPL_ACTIVE;Active application indicator
+Application;MT_ITEMS;MEAS_APLL_DURATION_UP_TO_6M;Settlement duration to 6 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_07_TO_12M;Settlement duration 7 to 12 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_13_TO_36M;Settlement duration 13 to 36 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_37_TO_72M;Settlement duration 37 to 72 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_73_TO_108M;Settlement duration 73 to 108 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_109_PLUS;Settlement duration more than 109 months
+Application;MT_ITEMS;MEAS_APLL_DURATION_COMPUTED;Settlement duration
+Application;MT_DATE;MEAS_APLL_DATE_STATUS_CANCELLED;Cancellation date
+Application;MT_DATE;MEAS_APLL_DATE_STATUS_REJECTED;Rejection date
+Application;MT_ITEMS;MEAS_APLL_DAYS_PENDING;Pending days
+Application;MT_ITEMS;MEAS_APLL_DAYS_APPROVED;Days to approval
+Application;MT_ITEMS;MEAS_APLL_DAYS_REJECTED;Days to rejection
+Application;MT_ITEMS;MEAS_APLL_DAYS_CANCELLED;Days to cancellation
+Application;MT_MONEY;MEAS_APLL_AMT_WRITEOFF;Balance written off
+Application;MT_MONEY;MEAS_APLL_AMT_ENTRY_PRINCIPAL;Principal on arrangement creation
+Application;MT_MONEY;MEAS_APLL_AMT_ENTRY_BALANCE;Balance on arrangement creation
+Application;MT_MONEY;MEAS_APLL_AMT_INSTALMENTS_FUTURE;Total future instalments amount
+Application;MT_LOV;MEAS_APLL_DELINQ_BUCKET_PM1;Months in arrears, 1 month ago
+Application;MT_LOV;MEAS_APLL_BUCKET_CLASS_OR_CANCELLED;Bucket class for active arrangements or cancelled status
+Application;MT_LOV;MEAS_APLL_STATUS_L1;Application status at the end of the preceding observation period
+Customer;MT_LOV;MEAS_CUSH_CATEG_SEGMENT;Customer segment
+Customer;MT_TEXT;MEAS_CUSH_QC_CUSTCODE;QC customer code
+Customer;MT_DATE;MEAS_CUSH_DATE_NOMINAL;Observation point date (customer)
+Customer;MT_ITEMS;MEAS_CUSH_SNAPNUM;Observation point number (customer)
+Application;MT_LOV;MEAS_APPL_DELINQ_BUCKET;Months in arrears

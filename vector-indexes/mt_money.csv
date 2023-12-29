@@ -1,0 +1,11 @@
+﻿Entity;Type;Name;Description
+Account;MT_MONEY;MEAS_ACCL_STRAY_PAYMENT_PREDICTION_PAYERS_AMT;Payment prediction for stray payers, not in active settlement
+Account;MT_MONEY;MEAS_ACCL_SETTLEMENT_PAYMENT_PREDICTION_PAYERS_AMT;Payment prediction for settlement payers
+Account;MT_MONEY;MEAS_ACCH_AMT_PAYMENT_CP;Amount paid within the observation period
+Application;MT_MONEY;MEAS_APPL_AMT_APPROVED;Approved amount
+Application;MT_MONEY;MEAS_APPL_AMT_DISCOUNT;Discount amount
+Application;MT_MONEY;MEAS_APPL_AMT_PAYMENTS_TOTAL;Total payments amount so far
+Application;MT_MONEY;MEAS_APLL_AMT_WRITEOFF;Balance written off
+Application;MT_MONEY;MEAS_APLL_AMT_ENTRY_PRINCIPAL;Principal on arrangement creation
+Application;MT_MONEY;MEAS_APLL_AMT_ENTRY_BALANCE;Balance on arrangement creation
+Application;MT_MONEY;MEAS_APLL_AMT_INSTALMENTS_FUTURE;Total future instalments amount

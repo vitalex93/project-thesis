@@ -1,0 +1,19 @@
+Provide a report that displays the number of accounts with running settlements for the Earth portfolio, their expected monthly payments at the end of the examined month and their actual monthly payments per DCA, for September 2020. 
+***
+Provide a report that displays the number of accounts not in running settlements for the Earth portfolio, their expected monthly payments at the end of the examined month and their actual monthly payments per DCA, for September 2020.
+***
+Provide the number of customers with active and running settlements of types Settlement, Preappoved, Resch to Sett, Out of Mandate Had Settlement and null on the Earth portfolio, the corresponding number of applications, the initial settlement amount, discount amount and future instalments per asset class and DCA, for September 2020.
+***
+Provide the distribution of the number of active and running settlements of types Settlement, Preappoved, Resch to Sett, Out of Mandate Had Settlement and null on the Earth portfolio based on their duration on the following bins: up to 6 months, 7 to 12 months, 13 to 36 months, 37 to 72 months, 72 to 108 months and more than 109 months. The analysis should be performane per asset class and DCA, for September 2020.
+***
+Produce a report that shows the bucket roll rates.On the rows of the report display the application bucket of the previous month for the following categories: 1, 2, 3, 4, 5, 6, 7-12, 13+, null. On the columns of the report display the application bucket of the current month for the same bucket categories. The report should measure the number of active and running applications for each pair of the aforementioned previous/current bucket categories for Mirror portfolio, for September 2020.
+***
+Create a report that shows the number of settlement applications submitted during the month, their approved amount and their entry principal and balance, for September 2020  per DCA and application type. The report should be produced on Earth portfolio.
+***
+Create a report that shows the number of pending settlement applications (in status Review, Working, Quality Control, For approval and Approved) submitted up to the end of the previous month, their approved amount, the average pending days  and their entry principal and balance, for September 2020  per DCA and application type. The report should be produced on Earth portfolio.
+***
+Create a report that shows the number of settlement applications approved during the month, their approved amount, the written off balance, the average days to approval, their average and median duration and their entry principal and balance, for September 2020 per DCA and application type. The report should be produced on Earth portfolio.
+***
+Create a report that shows the number of settlement applications rejected during the month, their approved amount, the average days to rejection, their entry principal and entry balance, for September 2020 per DCA and application type. The report should be produced on Earth portfolio.
+
+

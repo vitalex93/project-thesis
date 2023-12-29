@@ -1,0 +1,16 @@
+﻿Entity;Type;Name;Description
+Account;MT_ITEMS;MEAS_ACCH_SNAPNUM;Observation point number
+Application;MT_ITEMS;MEAS_APPL_DURATION_APPROVED;Approved duration
+Application;MT_ITEMS;MEAS_APPL_SNAPNUM;Observation point number (application)
+Application;MT_ITEMS;MEAS_APLL_DURATION_UP_TO_6M;Settlement duration to 6 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_07_TO_12M;Settlement duration 7 to 12 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_13_TO_36M;Settlement duration 13 to 36 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_37_TO_72M;Settlement duration 37 to 72 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_73_TO_108M;Settlement duration 73 to 108 months (included)
+Application;MT_ITEMS;MEAS_APLL_DURATION_109_PLUS;Settlement duration more than 109 months
+Application;MT_ITEMS;MEAS_APLL_DURATION_COMPUTED;Settlement duration
+Application;MT_ITEMS;MEAS_APLL_DAYS_PENDING;Pending days
+Application;MT_ITEMS;MEAS_APLL_DAYS_APPROVED;Days to approval
+Application;MT_ITEMS;MEAS_APLL_DAYS_REJECTED;Days to rejection
+Application;MT_ITEMS;MEAS_APLL_DAYS_CANCELLED;Days to cancellation
+Customer;MT_ITEMS;MEAS_CUSH_SNAPNUM;Observation point number (customer)
