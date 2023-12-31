@@ -7,6 +7,10 @@ import pandas as pd
 from lib import utils
 import joblib
 from functools import partial
+from dotenv import load_dotenv
+from langchain import LLMChain
+from langchain.prompts import PromptTemplate
+from langchain.llms import OpenAI
 
 class ReportGenerator:
 
@@ -28,7 +32,10 @@ class ReportGenerator:
         self.mt_items_index = self.mt_items.Description
         self.mt_dates_index = self.mt_dates.Description
         self.mt_lov_index = self.mt_lov.Description
+        self.llm = OpenAI(temperature=0.2, openai_api_key = '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')
         self.sbert = SentenceTransformer("all-mpnet-base-v2")
+        self.w2v_models = ['word2vec-google-news-300', 'glove-wiki-gigaword-50', 'fasttext-wiki-news-subwords-300', 'glove-wiki-gigaword-300']
+        self.bow_models = ['bow', 'tfidf', 'bow_bigrams', 'tfidf_bigrams', 'bow_trigrams', 'tfidf_trigrams']
         self.encoder = self.get_encoder(model=self.model) #SentenceTransformer("all-mpnet-base-v2")
         self.data_dictionary_df = pd.read_csv('./reports/data-dictionary.csv', sep=';')
         self.rows_dca_apptype = pd.read_csv('./reports/rows_dca_apptype.csv', sep=';')
@@ -37,7 +44,7 @@ class ReportGenerator:
         self.ground_truth = pd.read_csv('./reports/ground-truth.csv', sep=';')
         self.columns = self.get_columns()
 
-   
+  
     def process_description(self):
         stopwords_removed = utils.remove_stopwords(self.description)
         #keywords = utils.extract_keywords(stopwords_removed)
@@ -94,7 +101,7 @@ class ReportGenerator:
             tm = self.tfidf_trigrams
             encoder = partial(utils.encode, model=tm)
             return encoder
-        elif model == 'word2vec-google-news-300':
+        elif model in self.w2v_models:
             tm = api.load(model)
             encoder = partial(utils.encode_w2v, model=tm)
             return encoder
@@ -110,7 +117,7 @@ class ReportGenerator:
             index = faiss.IndexFlatL2(dim)
             index.add(encoder(idx))
             return index
-        elif model in ['bow', 'tfidf', 'bow_bigrams', 'tfidf_bigrams', 'bow_trigrams', 'tfidf_trigrams', 'word2vec-google-news-300']:
+        elif model in self.bow_models + self.w2v_models:
             idxvalues = []
             for i in list(idx):
                 idxvalues.append(encoder(i))
@@ -143,7 +150,7 @@ class ReportGenerator:
     def get_similar_vectors_in_index_per_value(self, type, k=5):
         types = self.get_unique_types()
         if type == 'MT_MONEY' and type in types:
-            encoded_values = [x for x in self.get_encoded_values_per_type()['MT_MONEY'] if x is not None] #self.get_encoded_values_per_type()['MT_MONEY']
+            encoded_values = [x for x in self.get_encoded_values_per_type()['MT_MONEY'] if x is not None] 
             index = self.build_index(idx=self.mt_money_index, model=self.model)
             df = self.mt_money
             list_of_value_names = self.get_unique_values_per_type()['MT_MONEY']
@@ -154,7 +161,7 @@ class ReportGenerator:
                 top_k_similar[list_of_value_names[i]] = list(df.loc[I[0]]['Name'])
             return top_k_similar               
         if type == 'MT_ITEMS' and type in types:
-            encoded_values = [x for x in self.get_encoded_values_per_type()['MT_ITEMS'] if x is not None]  #self.get_encoded_values_per_type()['MT_ITEMS']
+            encoded_values = [x for x in self.get_encoded_values_per_type()['MT_ITEMS'] if x is not None] 
             index = self.build_index(idx=self.mt_items_index, model=self.model)
             df = self.mt_items
             list_of_value_names = self.get_unique_values_per_type()['MT_ITEMS']
@@ -192,18 +199,48 @@ class ReportGenerator:
                 columns.append(mt_items[k][0])
         return columns
     
-    def get_operator_type_for_lov(self):
-        pass
+    def get_column_agg_function(self):
+        measures = {**self.get_similar_vectors_in_index_per_value(type='MT_MONEY', k=1), **self.get_similar_vectors_in_index_per_value(type='MT_ITEMS', k=1)}
+        template = PromptTemplate(
+            input_variables=['measure', 'description'],
+            template= 'Are there one or more aggregation functions, such as average, sum, median etc, that should be applied to this quantity \
+                      {measure} according to this description?: {description}. Provide only the name of the function(s).'
+                      )
+        chain = LLMChain(llm=self.llm, prompt=template, verbose=False)
+        agg_functions_dict = {}
+        for measure, col in measures.items():
+            agg_functions = chain.run({'measure':measure, 'description':self.description})
+            agg_functions_dict[col[0]] = agg_functions 
+        return agg_functions_dict
+
+    def get_operator_type_for_lov(self, lov):
+        template = PromptTemplate(
+            input_variables=['lov', 'description'],
+            template= 'Does the word/phrase {lov} act as a grouping or a filtering predicate in the following description?:{description}.\
+                        If it is a grouping predicate return 1. If it is a filtering predicate return 0.')
+        chain = LLMChain(llm=self.llm, prompt=template, verbose=False)
+        operator = int(chain.run({'lov':lov, 'description':self.description}))
+        return operator
 
     def get_rows(self):
         mt_lov = self.get_unique_values_per_type()['MT_LOV']
-        operator_type = self.get_operator_type_for_lov()
-        if 'DCA' in mt_lov and 'application type' not in mt_lov and 'asset class' not in mt_lov:
-            return self.rows_dca
-        elif 'DCA' in mt_lov and 'asset class' in mt_lov and 'application type' not in mt_lov:
-            return self.rows_dca_assetclass
-        elif 'DCA' in mt_lov and 'application type' in mt_lov and 'asset class' not in mt_lov:
-            return self.rows_dca_apptype
+        mt_dates = self.get_unique_values_per_type()['MT_DATE']
+        grouping_operators = []
+        filtering_operators = []
+        for lov in mt_lov + mt_dates:
+            if self.get_operator_type_for_lov(lov=lov) == 1:
+                grouping_operators.append(lov)
+            elif self.get_operator_type_for_lov(lov=lov) == 0:
+                filtering_operators.append(lov)
+        if 'DCA' in grouping_operators and 'application type .' in grouping_operators and 'asset class' in grouping_operators:
+            if 'DCA' in mt_lov and 'application type .' not in mt_lov and 'asset class' not in mt_lov:
+                return self.rows_dca
+            elif 'DCA' in mt_lov and 'asset class' in mt_lov and 'application type .' not in mt_lov:
+                return self.rows_dca_assetclass
+            elif 'DCA' in mt_lov and 'application type .' in mt_lov and 'asset class' not in mt_lov:
+                return self.rows_dca_apptype
+        else:
+            return 'Not seen in given data'
         
     def evaluation(self, report, metric):
         columns = self.columns
