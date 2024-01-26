@@ -11,12 +11,14 @@ from dotenv import load_dotenv
 from langchain import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.llms import OpenAI
+from langchain.embeddings import OpenAIEmbeddings
 
 class ReportGenerator:
 
     def __init__(self, description, model) -> None:
         self.description = description
         self.model = model
+        self.openai_embeddings = OpenAIEmbeddings(openai_api_key='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')
         self.bow = joblib.load('./models/models/bow_model.joblib')
         self.bow_bigrams = joblib.load('./models/models/bigrams_bow_model.joblib')
         self.bow_trigrams = joblib.load('./models/models/trigrams_bow_model.joblib')
@@ -32,7 +34,7 @@ class ReportGenerator:
         self.mt_items_index = self.mt_items.Description
         self.mt_dates_index = self.mt_dates.Description
         self.mt_lov_index = self.mt_lov.Description
-        self.llm = OpenAI(temperature=0.2, openai_api_key = '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')
+        self.llm = OpenAI(temperature=0.2, openai_api_key = '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')
         self.sbert = SentenceTransformer("all-mpnet-base-v2")
         self.w2v_models = ['word2vec-google-news-300', 'glove-wiki-gigaword-50', 'fasttext-wiki-news-subwords-300', 'glove-wiki-gigaword-300']
         self.bow_models = ['bow', 'tfidf', 'bow_bigrams', 'tfidf_bigrams', 'bow_trigrams', 'tfidf_trigrams']
@@ -108,6 +110,9 @@ class ReportGenerator:
         elif model == 'sbert':
             encoder = self.sbert.encode
             return encoder 
+        elif model == 'text-embedding-ada-002':
+            encoder = self.openai_embeddings.embed_query
+            return encoder
             
     def build_index(self, idx, model):
         model = self.model
@@ -117,7 +122,7 @@ class ReportGenerator:
             index = faiss.IndexFlatL2(dim)
             index.add(encoder(idx))
             return index
-        elif model in self.bow_models + self.w2v_models:
+        elif model in self.bow_models + self.w2v_models + ['text-embedding-ada-002']:
             idxvalues = []
             for i in list(idx):
                 idxvalues.append(encoder(i))

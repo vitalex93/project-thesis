@@ -1,5 +1,6 @@
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+from langchain.embeddings import OpenAIEmbeddings
 #import yake
 
 
@@ -49,7 +50,6 @@ def encode(text, model):
     encoder = tm.transform([text]).toarray()[0]
     return encoder
 
-
 def encode_w2v(sentence, model):
     words = sentence.split()
     embeddings = []
@@ -61,3 +61,4 @@ def encode_w2v(sentence, model):
     if len(embeddings) > 0:
         sentence_embedding = sum(embeddings) / len(embeddings)
         return sentence_embedding
+
